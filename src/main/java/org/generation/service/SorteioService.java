@@ -37,7 +37,6 @@ public class SorteioService {
         String data = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
         Aluno aluno = alunoList.get(new Random().nextInt(0, alunoList.size()));
-
         alunoList.remove(aluno);
         listaService.removendoAlunoSorteado(alunoList);
 

@@ -78,7 +78,6 @@ public class ListaService {
     public void removendoAlunoSorteado(List<Aluno> listRemove) {
 
         List<Aluno> list = listRemove;
-
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ALUNOS, false))) {
             for (Aluno aluno : list) {
                 writer.write(aluno.getNome());
