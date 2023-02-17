@@ -19,12 +19,10 @@ public class ListaService {
     public Optional<List<Aluno>> gerandoListaAlunos() {
 
         try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(ALUNOS)))) {
-            scanner.useDelimiter(";");
             List<Aluno> listaALunos = new ArrayList<>();
 
             while (scanner.hasNext()) {
-                String nome = scanner.next();
-                scanner.nextLine();
+                String nome = scanner.nextLine();
                 listaALunos.add(new Aluno(nome));
             }
             return Optional.of(listaALunos);
@@ -35,10 +33,9 @@ public class ListaService {
         }
     }
 
-    public  Optional<List<Tema>> gerandoListaTemas() {
+    public Optional<List<Tema>> gerandoListaTemas() {
 
         try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(TEMAS)))) {
-
             scanner.useDelimiter(";");
             List<Tema> listaTemas = new ArrayList<>();
 
@@ -70,5 +67,17 @@ public class ListaService {
         return alunoSorteado;
     }
 
+    public void removendoAlunoSorteado(List<Aluno> listRemove) {
 
+        List<Aluno> list = listRemove;
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ALUNOS, false))) {
+            for (Aluno aluno : list) {
+                writer.write(aluno.getNome());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 }

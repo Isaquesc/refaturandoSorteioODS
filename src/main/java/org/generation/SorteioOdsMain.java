@@ -4,8 +4,6 @@ import org.generation.model.AlunoSorteado;
 import org.generation.service.ListaService;
 import org.generation.service.SorteioService;
 
-import java.util.Scanner;
-
 public class SorteioOdsMain {
     public static void main(String[] args) {
 

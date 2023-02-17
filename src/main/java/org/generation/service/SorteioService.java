@@ -29,6 +29,9 @@ public class SorteioService {
 
         Aluno aluno = alunoList.get(new Random().nextInt(0, alunoList.size()));
 
+        alunoList.remove(aluno);
+        listaService.removendoAlunoSorteado(alunoList);
+
         return listaService.gerandoArquivoAlunosSorteados(aluno,data, time, tema);
     }
 
