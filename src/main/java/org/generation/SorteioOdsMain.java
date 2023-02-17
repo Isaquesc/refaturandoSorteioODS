@@ -10,7 +10,8 @@ public class SorteioOdsMain {
         SorteioService sorteioService = new SorteioService(new ListaService());
         AlunoSorteado alunoSorteado = sorteioService.sorteioAluno(sorteioService.sorteioTema().getTema());
 
-        System.out.println(alunoSorteado);
+        if(alunoSorteado.getNome() != null)
+        System.out.println(alunoSorteado.getNome() + " , " + alunoSorteado.getTema());
 
     }
 }

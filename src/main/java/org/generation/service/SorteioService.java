@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class SorteioService {
@@ -21,7 +22,15 @@ public class SorteioService {
     }
 
     public AlunoSorteado sorteioAluno(String tema) {
-        List<Aluno> alunoList = listaService.gerandoListaAlunos().get();
+
+        Optional<List<Aluno>> optionalAlunos = listaService.gerandoListaAlunos();
+
+        if (optionalAlunos.isPresent()) {
+            System.err.println("LISTA DE ALUNOS VAZIA");
+            return new AlunoSorteado(null, null, null, null);
+        }
+
+        List<Aluno> alunoList = optionalAlunos.get();
         Collections.shuffle(alunoList);
 
         String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
