@@ -21,10 +21,14 @@ public class ListaService {
         try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(ALUNOS)))) {
             List<Aluno> listaALunos = new ArrayList<>();
 
-            while (scanner.hasNext()) {
+            while (scanner.hasNextLine()) {
                 String nome = scanner.nextLine();
                 listaALunos.add(new Aluno(nome));
             }
+
+            if(listaALunos.isEmpty())
+                return Optional.empty();
+
             return Optional.of(listaALunos);
 
         } catch (IOException e) {
@@ -44,6 +48,10 @@ public class ListaService {
                 scanner.nextLine();
                 listaTemas.add(new Tema(tema));
             }
+
+            if(listaTemas.isEmpty())
+                return Optional.empty();
+
             return Optional.of(listaTemas);
 
         } catch (IOException e) {

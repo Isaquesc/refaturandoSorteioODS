@@ -23,14 +23,14 @@ public class SorteioService {
 
     public AlunoSorteado sorteioAluno(String tema) {
 
-        Optional<List<Aluno>> optionalAlunos = listaService.gerandoListaAlunos();
+        Optional<List<Aluno>> optionalAlunosList = listaService.gerandoListaAlunos();
 
-        if (optionalAlunos.isPresent()) {
+        if (optionalAlunosList.isEmpty()) {
             System.err.println("LISTA DE ALUNOS VAZIA");
             return new AlunoSorteado(null, null, null, null);
         }
 
-        List<Aluno> alunoList = optionalAlunos.get();
+        List<Aluno> alunoList = optionalAlunosList.get();
         Collections.shuffle(alunoList);
 
         String time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
@@ -45,7 +45,15 @@ public class SorteioService {
     }
 
     public Tema sorteioTema() {
-        List<Tema> temaList = listaService.gerandoListaTemas().get();
+        Optional<List<Tema>> optionalTemasList = listaService.gerandoListaTemas();
+
+        if (optionalTemasList.isEmpty()) {
+            System.err.println("LISTA DE TEMAS VAZIA");
+            return new Tema("Livre");
+        }
+
+        List<Tema> temaList = optionalTemasList.get();
+
         Collections.shuffle(temaList);
 
         return temaList.get(new Random().nextInt(0, temaList.size()));
